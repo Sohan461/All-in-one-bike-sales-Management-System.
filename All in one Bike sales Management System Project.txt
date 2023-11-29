@@ -1,0 +1,134 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.34 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use sohan_chavan;
+Database changed
+mysql> create table Sales(salesId int,
+    -> invoice_no int,
+    -> sales_date Date,
+    -> bikeID int,
+    -> customerID int,
+    -> dealerID int,
+    -> price int,
+    -> Other_fees int,
+    -> mode_of_payment varchar(255)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc sales;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| salesID         | int          | NO   | PRI | NULL    |       |
+| invoice_no      | int          | YES  |     | NULL    |       |
+| sales_date      | date         | YES  |     | NULL    |       |
+| bikeID          | int          | YES  |     | NULL    |       |
+| customerID      | int          | YES  |     | NULL    |       |
+| dealerID        | int          | YES  |     | NULL    |       |
+| price           | int          | YES  |     | NULL    |       |
+| Other_fees      | int          | YES  |     | NULL    |       |
+| mode_of_payment | varchar(255) | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+mysql> insert into sales(salesId,invoice_no,sales_date,BikeId,customerId,dealerID,price,Other_fees,mode_of_payment)
+ values (121,101,"2023-01-05",421,521,621,150000,2000,"cash"),
+(122,102,"2023-01-06",422,522,622,145000,3000,"net_banking"),
+(123,103,"2023-10-06",423,523,623,156000,4000,"NEFT"),
+(124,104,"2023-10-07",424,524,624,160000,5000,"credit_card"),
+(125,105,"2023-10-08",425,525,625,175000,4500,"debit_card"),
+(126,106,"2023-10-10",426,526,626,180000,6000,"EMI"),
+(127,107,"2023-10-12",427,527,627,200000,8000,"credit_card"),
+(128,108,"2023-10-15",428,528,628,220000,10000,"net_banking"),
+(129,109,"2023-10-20",429,529,629,250000,12000,"EMI"),
+(130,110,"2023-10-25",430,530,630,300000,25000,"Credit_card");
+Query OK, 10 rows affected (0.03 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from sales;
++---------+------------+------------+--------+------------+----------+--------+------------+-----------------+
+| salesId | invoice_no | sales_date | bikeID | customerID | dealerID | price  | Other_fees | mode_of_payment |
++---------+------------+------------+--------+------------+----------+--------+------------+-----------------+
+|     121 |        101 | 2023-01-05 |    421 |        521 |      621 | 150000 |       2000 | cash            |
+|     122 |        102 | 2023-01-06 |    422 |        522 |      622 | 145000 |       3000 | net_banking     |
+|     123 |        103 | 2023-10-06 |    423 |        523 |      623 | 156000 |       4000 | NEFT            |
+|     124 |        104 | 2023-10-07 |    424 |        524 |      624 | 160000 |       5000 | credit_card     |
+|     125 |        105 | 2023-10-08 |    425 |        525 |      625 | 175000 |       4500 | debit_card      |
+|     126 |        106 | 2023-10-10 |    426 |        526 |      626 | 180000 |       6000 | EMI             |
+|     127 |        107 | 2023-10-12 |    427 |        527 |      627 | 200000 |       8000 | credit_card     |
+|     128 |        108 | 2023-10-15 |    428 |        528 |      628 | 220000 |      10000 | net_banking     |
+|     129 |        109 | 2023-10-20 |    429 |        529 |      629 | 250000 |      12000 | EMI             |
+|     130 |        110 | 2023-10-25 |    430 |        530 |      630 | 300000 |      25000 | Credit_card     |
++---------+------------+------------+--------+------------+----------+--------+------------+-----------------+
+10 rows in set (0.00 sec)
+
+mysql> create table customers(CustID int primary key,
+    -> FirstName varchar(20),
+    -> LastName varchar(20),
+    -> city varchar(20),
+    -> pincode varchar(6),
+    -> address varchar(255),
+    -> Phone_No varchar(10),
+    -> Email varchar(255),
+    -> DOB Date,
+    -> DL_NO varchar(20)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc customers;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| CustID    | int          | NO   | PRI | NULL    |       |
+| FirstName | varchar(20)  | YES  |     | NULL    |       |
+| LastName  | varchar(20)  | YES  |     | NULL    |       |
+| city      | varchar(20)  | YES  |     | NULL    |       |
+| pincode   | varchar(6)   | YES  |     | NULL    |       |
+| address   | varchar(255) | YES  |     | NULL    |       |
+| Phone_No  | varchar(10)  | YES  |     | NULL    |       |
+| Email     | varchar(255) | YES  |     | NULL    |       |
+| DOB       | date         | YES  |     | NULL    |       |
+| DL_NO     | varchar(20)  | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+mysql> create table Bikes(Bikes_Id int,
+    -> Serial_no int,
+    -> Name varchar(50),
+    -> colour varchar(50),
+    -> manufacture varchar(255),
+    -> type varchar(50),
+    -> price int,
+    -> DealerId int,
+    -> custID int,
+    -> VIN varchar(40),
+    -> year YEAR
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc bikes;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| Bikes_Id    | int          | YES  |     | NULL    |       |
+| Serial_no   | int          | YES  |     | NULL    |       |
+| Name        | varchar(50)  | YES  |     | NULL    |       |
+| colour      | varchar(50)  | YES  |     | NULL    |       |
+| manufacture | varchar(255) | YES  |     | NULL    |       |
+| type        | varchar(50)  | YES  |     | NULL    |       |
+| price       | int          | YES  |     | NULL    |       |
+| DealerId    | int          | YES  |     | NULL    |       |
+| custID      | int          | YES  |     | NULL    |       |
+| VIN         | varchar(40)  | YES  |     | NULL    |       |
+| year        | year         | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+11 rows in set (0.00 sec)
